@@ -15,6 +15,11 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        body.velocity = new Vector2(Input.GetAxis("Horizontal")* playerSpeed ,body.velocity.y);
+        body.velocity = new Vector2(Input.GetAxis("Horizontal")* playerSpeed ,body.velocity.y);//horizontal movement
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            body.velocity = new Vector2(body.velocity.x, playerSpeed);//vertical jumping
+        }
     }
 }
