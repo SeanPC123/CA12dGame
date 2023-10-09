@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float playerSpeed; // lets me change the horizontal speed inside of unity
     [SerializeField] private float jumpHeight;
 
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D > ();
