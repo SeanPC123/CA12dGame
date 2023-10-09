@@ -5,7 +5,9 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     private Rigidbody2D body;
+    private bool onGround;
     [SerializeField] private float playerSpeed; // lets me change the horizontal speed inside of unity
+    [SerializeField] private float jumpHeight;
 
     private void Awake()
     {
@@ -17,9 +19,23 @@ public class Movement : MonoBehaviour
     {
         body.velocity = new Vector2(Input.GetAxis("Horizontal")* playerSpeed ,body.velocity.y);//horizontal movement
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && onGround)
         {
-            body.velocity = new Vector2(body.velocity.x, playerSpeed);//vertical jumping
+            Jump();
+        }
+    }
+
+    private void Jump()
+    {
+        body.velocity = new Vector2(body.velocity.x, jumpHeight);//vertical jumping
+        onGround = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            onGround = true;
         }
     }
 }
