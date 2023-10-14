@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float jumpHeight;
 
 
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D > ();
@@ -18,7 +19,18 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        float horizontalInput = Input.GetAxis("Horizontal");
         body.velocity = new Vector2(Input.GetAxis("Horizontal")* playerSpeed ,body.velocity.y);//horizontal movement
+
+        //flipping
+        if(Input.GetAxis("Horizontal") > 0.01f)
+        {
+            transform.localScale = Vector3.one;
+        }
+        else if (Input.GetAxis("Horizontal") < -0.01f)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
 
         if (Input.GetKey(KeyCode.Space) && onGround)
         {
