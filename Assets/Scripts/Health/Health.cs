@@ -4,37 +4,35 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private float startingHealth;
-    public float currentHealth {get; private set;}
-
+    [SerializeField]private float startingHealth;
+    public float currentHealth {  get; private set; }
 
     private void awake()
     {
         currentHealth = startingHealth;
     }
 
-    public void damage(float _damage)
+    public void takeDamage(float _damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
-        currentHealth -= _damage;
 
-        if (currentHealth > 0) 
-        {
-
+        if(currentHealth > 0) 
+        { 
+        
         }
 
         else
         {
 
         }
+        
     }
 
-    private void update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E))
         {
-            damage(1);
+            takeDamage(1);
         }
     }
-
 }
